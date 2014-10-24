@@ -1,4 +1,4 @@
-package fr.istic.aocproject.metronome;
+package fr.istic.aocproject.metronomeEngine;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
