@@ -11,7 +11,7 @@ public class StartCommand implements ICommand
 	}
 
 	public void execute() {
-				
+		System.out.println("ça roule !!!");		
 	}
 
 }
