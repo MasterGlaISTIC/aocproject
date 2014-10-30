@@ -1,20 +1,22 @@
 package fr.istic.aocproject.metronomeEngine;
 
 
-
-
 public class StartCommand implements ICommand
 {
 	
 	
-	IMetronomieEngine theMetronome;
+	//IMetronomieEngine theMetronome;
 	
-	public StartCommand(IMetronomieEngine newMetronome){
-		theMetronome = newMetronome;
+	public StartCommand(){
+		//theMetronome = newMetronome;
 	}
 
 	public void execute() {
-		theMetronome.startCmd();		
+
+		//theMetronome.startCmd();		
+
+		System.out.println("ça roule !!!");		
+
 	}
 
 }
