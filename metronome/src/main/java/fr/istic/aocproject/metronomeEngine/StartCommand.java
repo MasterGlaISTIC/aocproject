@@ -6,12 +6,15 @@ package fr.istic.aocproject.metronomeEngine;
 public class StartCommand implements ICommand
 {
 	
-	public StartCommand(){
-		
+	
+	IMetronomieEngine theMetronome;
+	
+	public StartCommand(IMetronomieEngine newMetronome){
+		theMetronome = newMetronome;
 	}
 
 	public void execute() {
-				
+		theMetronome.startCmd();		
 	}
 
 }

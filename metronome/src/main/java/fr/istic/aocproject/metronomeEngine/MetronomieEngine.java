@@ -48,5 +48,10 @@ public class MetronomieEngine implements IMetronomieEngine
 		
 	}
 
+	public void startCmd() {
+		System.out.println("start");
+		
+	}
+
 }
 
