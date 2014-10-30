@@ -1,13 +1,13 @@
 package fr.istic.aocproject.ihm;
 
 import java.net.URL;
-
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import fr.istic.aocproject.metronomeEngine.StartCommand;
 
 
 /**
@@ -26,6 +26,7 @@ public class IHMControler implements IiHMControler, Initializable
 	
 	private IButton startBtn;
 	
+	
 	public IHMControler(){
 		super();
 	}
@@ -38,6 +39,7 @@ public class IHMControler implements IiHMControler, Initializable
 		
 		
 		setStartBtn(new StartBtn(start));
+		start.setOnAction((e) -> {startBtn.setCommand(new StartCommand());});
 	}
 
 

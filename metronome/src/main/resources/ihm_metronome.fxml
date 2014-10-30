@@ -7,16 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.istic.aocproject.ihm.IHMControler">
    <children>
-      <Button layoutX="70.0" layoutY="277.0" mnemonicParsing="false" text="START" />
-      <Button layoutX="164.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="STOP" />
-      <Button layoutX="269.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="INC" />
-      <Button layoutX="376.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="DEC" />
-      <Slider layoutX="54.0" layoutY="74.0" orientation="VERTICAL" />
-      <TextField alignment="CENTER" layoutX="152.0" layoutY="119.0" prefHeight="25.0" prefWidth="153.0" text="120" />
-      <Circle blendMode="SRC_ATOP" layoutX="364.0" layoutY="91.0" radius="7.0" stroke="#f8eeee" strokeType="INSIDE">
+      <Button fx:id="start" layoutX="70.0" layoutY="277.0" mnemonicParsing="false" text="START" />
+      <Button fx:id="stop" layoutX="164.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="STOP" />
+      <Button fx:id="inc" layoutX="269.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="INC" />
+      <Button fx:id="dec" layoutX="376.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="DEC" />
+      <Slider fx:id="slider" layoutX="54.0" layoutY="74.0" orientation="VERTICAL" />
+      <TextField fx:id="display" alignment="CENTER" layoutX="152.0" layoutY="119.0" prefHeight="25.0" prefWidth="153.0" text="120" />
+      <Circle fx:id="led1" blendMode="SRC_ATOP" layoutX="364.0" layoutY="91.0" radius="7.0" stroke="#f8eeee" strokeType="INSIDE">
          <fill>
             <LinearGradient endX="1.0" endY="1.0" startY="0.07211538461538461">
                <stops>
@@ -26,7 +25,7 @@
             </LinearGradient>
          </fill>
       </Circle>
-      <Circle blendMode="SRC_ATOP" layoutX="364.0" layoutY="165.0" radius="7.0" stroke="#f8eeee" strokeType="INSIDE">
+      <Circle fx:id="led2" blendMode="SRC_ATOP" layoutX="364.0" layoutY="165.0" radius="7.0" stroke="#f8eeee" strokeType="INSIDE">
          <fill>
             <LinearGradient endX="1.0" endY="1.0" startY="0.07211538461538461">
                <stops>
