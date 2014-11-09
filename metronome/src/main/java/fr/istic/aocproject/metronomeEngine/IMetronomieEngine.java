@@ -17,11 +17,14 @@ public  interface IMetronomieEngine
 		public void setTempo(int parameter) ;
 		
 		Integer BPM_INITIAL_VALUE = 120;
+		
+		Integer NTM_INITIAL_VALUE = 4;
 
 		public void incBPM();
 
 		public void decBPM();
 
 		public String getBPM();
-}
+
+		}
 

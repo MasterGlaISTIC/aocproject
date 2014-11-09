@@ -1,13 +1,16 @@
 package fr.istic.aocproject.ihm;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import fr.istic.aocproject.controller.Controller;
 import fr.istic.aocproject.controller.IController;
 import fr.istic.aocproject.metronomeEngine.DecCommand;
@@ -31,6 +34,10 @@ public class IHMControler implements IiHMControler, Initializable {
 	@FXML
 	private TextField textfield;
 
+	/* Molette */
+	@FXML
+	private Slider slider;
+	
 	private IController controller;
 
 	// GEL
@@ -85,6 +92,13 @@ public class IHMControler implements IiHMControler, Initializable {
 			textfield.setText(controller.getBPM());
 		});
 
+		// Slider
+		slider.setMin(0);
+		slider.setMax(200);
+		slider.setValue(120);
+		slider.valueProperty().addListener((ov,old_val,new_val) -> {
+			textfield.setText((int)new_val.doubleValue()+"");
+		});
 		/*
 		 * start.setOnAction(new EventHandler<ActionEvent>() {
 		 * 

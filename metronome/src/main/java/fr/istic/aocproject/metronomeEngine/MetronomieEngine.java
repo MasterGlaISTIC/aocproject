@@ -7,11 +7,16 @@ public class MetronomieEngine implements IMetronomieEngine
 {
 	
 	private Integer bpm;
+	
+	/* nombre de temps dans une mesure */
+	private Integer ntm;
+	
 	private boolean running;
 	
 	public MetronomieEngine(){
 		super();
 		bpm = BPM_INITIAL_VALUE;
+		ntm = NTM_INITIAL_VALUE;
 		
 	}
 
@@ -63,14 +68,14 @@ public class MetronomieEngine implements IMetronomieEngine
 
 	@Override
 	public void incBPM() {
-		bpm++;
-		
-	}
+		if (ntm < 7 )
+		ntm++;
+		}
 
 	@Override
 	public void decBPM() {
-		if(bpm > 0)
-		bpm--;
+		if(ntm > 2)
+		ntm--;
 		
 	}
 
@@ -78,6 +83,14 @@ public class MetronomieEngine implements IMetronomieEngine
 	public String getBPM() {
 		return bpm+"";
 		
+	}
+
+	public Integer getNtm() {
+		return ntm;
+	}
+
+	public void setNtm(Integer ntm) {
+		this.ntm = ntm;
 	}
 
 
