@@ -4,11 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-
 import javafx.scene.control.TextField;
 import fr.istic.aocproject.metronomeEngine.StartCommand;
 import fr.istic.aocproject.metronomeEngine.StopCommand;
@@ -16,6 +14,7 @@ import fr.istic.aocproject.metronomeEngine.IncCommand;
 import fr.istic.aocproject.metronomeEngine.DecCommand;
 
 
+@SuppressWarnings("restriction")
 public class IHMControler implements IiHMControler, Initializable
 {
 	
