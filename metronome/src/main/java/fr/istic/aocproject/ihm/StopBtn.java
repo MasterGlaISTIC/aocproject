@@ -2,25 +2,24 @@ package fr.istic.aocproject.ihm;
 
 
 import javafx.scene.control.Button;
-
 import fr.istic.aocproject.metronomeEngine.ICommand;
 
 
-public class StartBtn implements IButton
+public class StopBtn implements IButton
 {
-	Button start;
-	ICommand commandStart;
+	Button stop;
+	ICommand commandStop;
 	
-	public StartBtn(Button start){
-		this.start = start;
+	public StopBtn(Button stop){
+		this.stop = stop;
 	}
 
 	
 	
 	public void setCommand(ICommand parameter) {
-		commandStart = parameter;
+		commandStop = parameter;
+		commandStop.execute(); 
 
-		commandStart.execute(); 
 
 	}
 	

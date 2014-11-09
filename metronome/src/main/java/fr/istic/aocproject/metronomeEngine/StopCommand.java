@@ -1,13 +1,11 @@
 package fr.istic.aocproject.metronomeEngine;
 
+public class StopCommand implements ICommand{
+	
 
-public class StartCommand implements ICommand
-{
-	
-	
 	//IMetronomieEngine theMetronome;
 	
-	public StartCommand(){
+	public StopCommand(){
 		//theMetronome = newMetronome;
 	}
 
@@ -15,8 +13,9 @@ public class StartCommand implements ICommand
 
 		//theMetronome.startCmd();		
 
-		System.out.println("ça roule !!!");		
+		System.out.println("stop !!!");		
+
 	}
 
-}
 
+}

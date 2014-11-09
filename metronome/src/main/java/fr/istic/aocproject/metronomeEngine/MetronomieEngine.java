@@ -10,8 +10,7 @@ package fr.istic.aocproject.metronomeEngine;
 public class MetronomieEngine implements IMetronomieEngine
 {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 
 	 * @generated
 	 */
 	public MetronomieEngine(){
@@ -45,6 +44,11 @@ public class MetronomieEngine implements IMetronomieEngine
 
 	public void setTempo(int parameter) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void startCmd() {
+		System.out.println("start");
 		
 	}
 
