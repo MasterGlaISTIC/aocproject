@@ -4,7 +4,7 @@ package fr.istic.aocproject.ihm;
 import javafx.scene.control.Button;
 import fr.istic.aocproject.metronomeEngine.ICommand;
 
-@SuppressWarnings("restriction")
+
 public class DecBtn implements IButton{
 
 
@@ -19,6 +19,12 @@ public class DecBtn implements IButton{
 		commandDec = parameter;
 		commandDec.execute(); 
 		
+	}
+
+	@Override
+	public ICommand getCommand() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

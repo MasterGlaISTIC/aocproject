@@ -1,22 +1,20 @@
 package fr.istic.aocproject.ihm;
 
 import java.net.URL;
-
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
+import javafx.scene.shape.Circle;
 import fr.istic.aocproject.controller.Controller;
 import fr.istic.aocproject.controller.IController;
-import fr.istic.aocproject.metronomeEngine.DecCommand;
-import fr.istic.aocproject.metronomeEngine.IncCommand;
+import fr.istic.aocproject.metronomeEngine.StartCommand;
 
-@SuppressWarnings("restriction")
+
 public class IHMControler implements IiHMControler, Initializable {
 
 	@FXML
@@ -34,63 +32,70 @@ public class IHMControler implements IiHMControler, Initializable {
 	@FXML
 	private TextField textfield;
 
-	/* Molette */
+	@FXML
+	private Circle led2;
+
 	@FXML
 	private Slider slider;
-	
-	private IController controller;
 
-	// GEL
+	//le controlleur 
+	private IController controller;
 	private IButton startBtn;
 	private IButton stopBtn;
 	private IButton incBtn;
 	private IButton decBtn;
 
-	// GEL
+	//led adapter 
+	private Led ledAdpter;
 
 	public IHMControler() {
-		super();
+
+		//this.controller = controller;
 		controller = new Controller();
+		//model.register(this); */
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Logger.getGlobal().info(
-				String.format("Initialized with a button start",
-						start.toString()));
-
+		Logger.getGlobal().info(String.format("Initialized with a button start",start.toString()));
+		ledAdpter = new Led();
 		// BPM Initialisation
-		textfield.setText(String.valueOf(controller.initBPM()));
-
+		//textfield.setText(String.valueOf(controller.initBPM()));
 		setStartBtn(new StartBtn(start));
-
 		setStopBtn(new StopBtn(stop));
 		setIncBtn(new IncBtn(inc));
 		setDecBtn(new DecBtn(dec));
 
+		// ajout d'adapter pour le led 
+		controller.setLedBeat(ledAdpter);
+		
+		StartCommand startCmd = new StartCommand(); ;
 		start.setOnAction((e) -> {
-			controller.inStart();/* startBtn.setCommand(new StartCommand()); */
+			
+			startCmd.setControl(controller);
+			//startBtn.getCommand().execute();
+			//startBtn.setCommand(new StartCommand());
+//			controller.inStart();
+			startCmd.execute();
+			//led.setFill(javafx.scene.paint.Color.RED);
+			
+			
 		});
 		stop.setOnAction((e) -> {
-			controller.inStop();/* stopBtn.setCommand(new StopCommand()); */
+			//stopBtn.getCommand().execute();
+			//stopBtn.setCommand(new StartCommand());
 		});
 
-		inc.setOnAction((e) -> {
-			incBtn.setCommand(new IncCommand());
-			/*
-			 * Integer val =Integer.parseInt(textfield.getText()); val = val +1;
-			 */
-			controller.incBPM();
-			textfield.setText(controller.getBPM());
-		});
-
-		dec.setOnAction((e) -> {
-			decBtn.setCommand(new DecCommand());
-			/*
-			 * Integer val =Integer.parseInt(textfield.getText()); val = val-1;
-			 */
-			controller.decBPM();
-			textfield.setText(controller.getBPM());
-		});
+//		inc.setOnAction((e) -> {
+//			incBtn.setCommand(new IncCommand());
+//			controller.incBPM();
+//			textfield.setText(controller.getBPM());
+//		});
+//
+//		dec.setOnAction((e) -> {
+//			decBtn.setCommand(new DecCommand());
+//			controller.decBPM();
+//			textfield.setText(controller.getBPM());
+//		});
 
 		// Slider
 		slider.setMin(0);
@@ -98,27 +103,9 @@ public class IHMControler implements IiHMControler, Initializable {
 		slider.setValue(120);
 		slider.valueProperty().addListener((ov,old_val,new_val) -> {
 			textfield.setText((int)new_val.doubleValue()+"");
-		});
-		/*
-		 * start.setOnAction(new EventHandler<ActionEvent>() {
-		 * 
-		 * @Override public void handle(ActionEvent e) { startBtn.setCommand(new
-		 * StartCommand());
-		 * 
-		 * } });
-		 */
-
-		// Listen for TextField text changes
-		/*
-		 * textfield.textProperty().addListener(new ChangeListener<String>() {
-		 * 
-		 * @Override public void changed(ObservableValue<? extends String>
-		 * observable, String oldValue, String newValue) {
-		 * 
-		 * textfield.appendText("1"); } });
-		 */
-
+		});		
 	}
+
 
 	public IButton getStartBtn() {
 		return startBtn;
@@ -151,5 +138,22 @@ public class IHMControler implements IiHMControler, Initializable {
 	public void setDecBtn(IButton decBtn) {
 		this.decBtn = decBtn;
 	}
+	/*
+	@Override
+	public void update() {
+		if(model.isRunning()){
+			textfield.setText(""+model.getBpm());
+			if(model.getTempo() == 0 ){
+				led2.setFill(javafx.scene.paint.Color.RED);
+			}
+			else{
+				led2.setFill(javafx.scene.paint.Color.BLACK);
+			}
+		}
+
+	}*/
+	
+
+
 
 }

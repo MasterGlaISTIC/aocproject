@@ -5,10 +5,9 @@ import fr.istic.aocproject.metronomeEngine.ICommand;
 
 public  interface IButton 
 {
-	
-	
-	public void setCommand(ICommand parameter) ;
-	
+		
+	public void setCommand(ICommand parameter);
+	public ICommand getCommand();
 	
 }
 

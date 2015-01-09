@@ -1,9 +1,6 @@
 package fr.istic.aocproject.ihm;
 
 
+public interface IiHMControler {
 
-public  interface IiHMControler 
-{
-	
 }
-

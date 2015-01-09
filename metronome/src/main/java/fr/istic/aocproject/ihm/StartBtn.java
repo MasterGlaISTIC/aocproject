@@ -3,8 +3,9 @@ package fr.istic.aocproject.ihm;
 
 import javafx.scene.control.Button;
 import fr.istic.aocproject.metronomeEngine.ICommand;
+import fr.istic.aocproject.metronomeEngine.StartCommand;
 
-@SuppressWarnings("restriction")
+
 public class StartBtn implements IButton
 {
 	Button start;
@@ -12,17 +13,23 @@ public class StartBtn implements IButton
 	
 	public StartBtn(Button start){
 		this.start = start;
+		commandStart = new StartCommand();
 	}
 
-	
-	
+	public StartBtn() {
+	}
+
 	public void setCommand(ICommand parameter) {
 		commandStart = parameter;
-
-		commandStart.execute(); 
-
 	}
-	
+
+	@Override
+	public ICommand getCommand() {
+		return commandStart;
+	}
+
+
+
 
 	
 }
