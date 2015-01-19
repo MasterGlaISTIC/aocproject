@@ -4,7 +4,10 @@ import fr.istic.aocproject.metronomeEngine.command.ICommand;
 import fr.istic.aocproject.utils.Horloge;
 import fr.istic.aocproject.utils.HorlogeImpl;
 
-
+/**
+ * @author amhachi & chaabi
+ * This class describes the Model of Metronome Engine application
+ */
 
 
 public class MetronomeEngine implements IMetronomeEngine
@@ -23,44 +26,64 @@ public class MetronomeEngine implements IMetronomeEngine
 	private ICommand barCmd;
 	private ICommand beatCmd;
 	
+	/*
+	 * initialize the bpm ntm and 
+	 * instantiate the horlogeBar and horlogeBeat Object
+	 */
 	public MetronomeEngine(){
 		super();
 		bpm = BPM_INITIAL_VALUE;
 		ntm = NTM_INITIAL_VALUE;
-		
 		horlogeBar = new HorlogeImpl();
-		horlogeBeat= new HorlogeImpl();
-		
-		
+		horlogeBeat= new HorlogeImpl();		
 		}
 
-	
+	/*
+	 * Returns <code>true</code> if the state of the metronome is On
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#isRunning()
+	 */
 	@Override
 	public boolean isRunning() {
 		
 		return running;
 	}
-
+	
+	/*
+	 * Returns the  bpm 
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#getTempo()
+	 */
 	public Integer getTempo() {
 		return bpm;
 	}
-
+	
+	/*
+	 * Sets the barCmd 
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#setBarCmd(fr.istic.aocproject.metronomeEngine.command.ICommand)
+	 */
+ 
 	public void setBarCmd(ICommand parameter) {
 		barCmd = parameter;
 		
 	}
 
+	/*
+	 * Sets the beat Command 
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#setBeatCmd(fr.istic.aocproject.metronomeEngine.command.ICommand)
+	 */
 	public void setBeatCmd(ICommand parameter) {
 		beatCmd = parameter;
 		
 	}
-
+	
+	/*
+	 * Sets the state of the metronome 
+	 * @param running the state (boolean)of the metronome 
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#setRunning(boolean)
+	 */
 	public void setRunning(boolean running) {
 		
-		System.out.println("9- Running");
 		this.running = running;
 		if (running) {
-			System.out.println("SetRunning : true");
 			double delayStep = (60.0 / bpm) * 1000;
 			horlogeBeat.periodicallyActivate(beatCmd, delayStep);
 			horlogeBar.periodicallyActivate(barCmd, delayStep*ntm);
@@ -71,29 +94,47 @@ public class MetronomeEngine implements IMetronomeEngine
 		}
 		
 	}
-
+    
+	/*
+	 * Sets the tempo 
+	 * @param bmp the value of the tempo 
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#setTempo(int)
+	 */
+	
 	public void setTempo(int bmp) {
 		this.bpm = bmp;
 		
 	}
+	
+	/*
+	 * Returns  the bpm
+	 */
 
 	public Integer getBpm() {
 		return bpm;
 	}
 
+	/*
+	 * Sets the Bpm 
+	 */
 	public void setBpm(Integer bpm) {
 		this.bpm = bpm;
 	}
 
-
-
-
+	/*
+	 * increases the number of NTM
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#incNTM()
+	 */
 	@Override
 	public void incNTM() {
 		if (ntm < NTM_MAX_VALUE )
 		ntm++;
 		}
 
+	/*
+	 * decreases the value of NTM
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#decNTM()
+	 */
 	@Override
 	public void decNTM() {
 		if(ntm > NTM_MIN_VALUE)
@@ -101,16 +142,26 @@ public class MetronomeEngine implements IMetronomeEngine
 		
 	}
 
+	/*
+	 * Returns the value of Bpm
+	 * @see fr.istic.aocproject.metronomeEngine.IMetronomeEngine#getBPM()
+	 */
 	@Override
 	public String getBPM() {
 		return bpm+"";
 		
 	}
 
+	/*
+	 * Returns the value of Ntm
+	 */
 	public Integer getNtm() {
 		return ntm;
 	}
-
+	
+	/*
+	 * Sets the value of the Ntm
+	 */
 	public void setNtm(Integer ntm) {
 		this.ntm = ntm;
 	}
