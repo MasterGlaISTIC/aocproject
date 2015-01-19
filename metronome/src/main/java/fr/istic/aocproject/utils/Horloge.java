@@ -6,8 +6,8 @@ import fr.istic.aocproject.metronomeEngine.command.ICommand;
 public interface Horloge {
 
 	/**
-	 * Appel periodique de l'operation execute() de cmd, toutes les
-	 * perdiodInMiliSeconds, avec une precision d'une milliseconde
+	 * Periodic call the operation execute () cmd, all
+  	 * perdiodInMiliSeconds, with an accuracy of one millisecond
 	 * 
 	 * @param cmd
 	 * @param perdiodInSeconds
@@ -15,7 +15,7 @@ public interface Horloge {
 	public void periodicallyActivate(ICommand cmd, double perdiodInMiliSeconds);
 
 	/**
-	 * Desactivation de la commande
+	 * Command desactivation
 	 */
 	public void desactivate(ICommand cmd);
 }

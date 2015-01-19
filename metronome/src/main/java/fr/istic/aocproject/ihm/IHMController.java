@@ -36,7 +36,16 @@ import fr.istic.aocproject.metronomeEngine.command.SlideCommand;
 import fr.istic.aocproject.metronomeEngine.command.StartCommand;
 import fr.istic.aocproject.metronomeEngine.command.StopCommand;
 
+
 @SuppressWarnings("restriction")
+
+
+/**
+ * FXML Controller class
+ * @author amhachi & chaabi
+ * @version 1.0 2015-01-10 T 20:00
+ */
+
 public class IHMController implements IiHMController, Initializable {
 
 	@FXML
@@ -60,6 +69,9 @@ public class IHMController implements IiHMController, Initializable {
 	@FXML
 	private TextField textfield;
 
+	@FXML
+	private TextField textfield1;
+
 	/* Molette */
 	@FXML
 	private Slider slider;
@@ -74,9 +86,21 @@ public class IHMController implements IiHMController, Initializable {
 
 	// GEL
 
+	/**
+	 * Default constructor.
+	 */
+
 	public IHMController() {
 		super();
 	}
+
+	/*
+	 * Methode called to initialize a controller after its root element 
+	 * has been completely processed.
+	 * @param URL used to resolve relative paths for the root object
+	 * @param ResourceBundle used to localize the root object
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Logger.getGlobal().info(
@@ -98,11 +122,13 @@ public class IHMController implements IiHMController, Initializable {
 
 		stop();
 
+
 		inc();
 
 		dec();
 
 		final IHMController pere = this;
+
 		// Slider
 		slider.setMin(MetronomeEngine.BPM_MIN_VALUE);
 		slider.setMax(MetronomeEngine.BPM_MAX_VALUE);
@@ -113,35 +139,67 @@ public class IHMController implements IiHMController, Initializable {
 			pere.notifyMetronomeSlidePosition(position);
 		});
 
+
 	}
 
+	/*
+	 * Returns the Button start
+	 */
+	
 	public IButton getStartBtn() {
 		return startBtn;
 	}
 
+	/*
+	 * Sets the Button start
+	 */
 	public void setStartBtn(IButton startBtn) {
 		this.startBtn = startBtn;
 	}
 
+	/*
+	 * Returns the Button stop
+	 */
+
 	public IButton getStopBtn() {
 		return stopBtn;
 	}
+	
+	/*
+	 * Sets the Button stop
+	 */
 
 	public void setStopBtn(IButton stopBtn) {
 		this.stopBtn = stopBtn;
 	}
-
+	
+	/*
+	 * Returns the Button increment 
+	 */
+	
 	public IButton getIncBtn() {
 		return incBtn;
 	}
+	
+	/*
+	 * Sets the Button decrement 
+	 */
 
 	public void setIncBtn(IButton incBtn) {
 		this.incBtn = incBtn;
 	}
+	
+	/*
+	 * Returns the Button decrement 
+	 */
 
 	public IButton getDecBtn() {
 		return decBtn;
 	}
+	
+	/*
+	 * Sets the Button decrement 
+	 */
 
 	public void setDecBtn(IButton decBtn) {
 		this.decBtn = decBtn;
@@ -149,10 +207,13 @@ public class IHMController implements IiHMController, Initializable {
 
 	TranslateTransition transition;
 	boolean theFistTimeBeat = true;
+
 	AudioInputStream audioInputStream;
 	Clip clip;
 
+
 	@Override
+
 	public void flashLed1() throws UnsupportedAudioFileException, IOException,
 			LineUnavailableException {
 		if (!theFistTimeBeat) {
@@ -197,13 +258,24 @@ public class IHMController implements IiHMController, Initializable {
 		} else
 			theFistTimeBar = false;
 
+
 	}
+
+	/*
+	 * Sets the Controller Object 
+	 * @param controller controller architecture
+	 * @see fr.istic.aocproject.ihm.IiHMController#setController(fr.istic.aocproject.controller.Controller)
+	 */
 
 	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
 
 	}
+	/*
+	 * active pressure issuance of clicks each time and eclaire of the led
+	 * @see fr.istic.aocproject.ihm.IiHMController#start()
+	 */
 
 	@Override
 	public void start() {
@@ -212,6 +284,7 @@ public class IHMController implements IiHMController, Initializable {
 		start.setOnAction((e) -> {
 			startCmd.execute();
 		});
+
 
 	}
 
@@ -224,7 +297,13 @@ public class IHMController implements IiHMController, Initializable {
 			slideCmd.execute();
 		});
 
+
 	}
+
+	/*
+	 * disables sound and light signals
+	 * @see fr.istic.aocproject.ihm.IiHMController#stop()
+	 */
 
 	@Override
 	public void stop() {
@@ -240,6 +319,12 @@ public class IHMController implements IiHMController, Initializable {
 
 	}
 
+	/*
+	 * disables sound and light signals for each pressure increases the number 
+	 * of beats in a measure of a unit
+	 * @see fr.istic.aocproject.ihm.IiHMController#inc()
+	 */
+
 	@Override
 	public void inc() {
 		IncCommand incCmd = new IncCommand();
@@ -249,6 +334,11 @@ public class IHMController implements IiHMController, Initializable {
 		});
 
 	}
+
+	/*
+	 * decreases the number of beats in a measure unit
+	 * @see fr.istic.aocproject.ihm.IiHMController#dec()
+	 */
 
 	@Override
 	public void dec() {
