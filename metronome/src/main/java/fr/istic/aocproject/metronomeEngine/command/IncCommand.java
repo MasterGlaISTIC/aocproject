@@ -20,8 +20,7 @@ public class IncCommand implements ICommand{
 
 	public void execute() {
 
-		//theMetronome.startCmd();		
-		System.out.println("inc !!!");
+
 		controller.inc();	
 
 	}

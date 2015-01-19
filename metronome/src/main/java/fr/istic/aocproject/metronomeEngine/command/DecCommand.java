@@ -21,9 +21,6 @@ public class DecCommand implements ICommand{
 
 	public void execute() {
 
-		//theMetronome.startCmd();		
-
-		System.out.println("dec !!!");
 		controller.dec();
 
 	}

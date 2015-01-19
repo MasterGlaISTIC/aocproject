@@ -1,5 +1,10 @@
 package fr.istic.aocproject.controller;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import fr.istic.aocproject.adapter.IView;
 import fr.istic.aocproject.adapter.View;
 import fr.istic.aocproject.ihm.IiHMController;
@@ -22,12 +27,11 @@ public class Controller implements IController {
 	}
 	
 	private Controller() {
-		metronomeEngine = new MetronomeEngine();
+		metronomeEngine = MetronomeEngine.getControllerInstance();
 	}
 	
 	@Override
-	public void start() {
-		System.out.println("3- controller Start");
+	public void start() { 
 		
 		if(view != null)
 		view.setController(this);
@@ -75,12 +79,12 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void displayLed1() {
+	public void displayLed1() throws UnsupportedAudioFileException, IOException, LineUnavailableException  {
 		view.flashLed1();
 	}
 
 	@Override
-	public void displayLed2() {
+	public void displayLed2() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		System.out.println("12- Bar displayLed2");
 		view.flashLed2();
 	}
@@ -100,6 +104,12 @@ public class Controller implements IController {
 
 	public void createViewAdapter(IiHMController ihmController) {
 		view = new View(ihmController);
+	}
+
+	@Override
+	public void notifyMetronomeSlidePosition(int position) {
+		metronomeEngine.setTempo(position);
+		
 	}
 
 

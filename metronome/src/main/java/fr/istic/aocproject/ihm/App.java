@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
+@SuppressWarnings("restriction")
 public class App extends Application {
 
     @Override

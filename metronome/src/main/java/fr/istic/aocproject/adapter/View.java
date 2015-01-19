@@ -1,19 +1,25 @@
 package fr.istic.aocproject.adapter;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import fr.istic.aocproject.controller.Controller;
 import fr.istic.aocproject.ihm.IiHMController;
+
 
 public class View implements IView{
 
 	private IiHMController ihm;
 	
-	private IButton start;
-	private IButton stop;
-	private IButton inc;
-	private IButton dec;
-	
-	private ILed led1;
-	private ILed led2;
+//	private IButton start;
+//	private IButton stop;
+//	private IButton inc;
+//	private IButton dec;
+//	
+//	private ILed led1;
+//	private ILed led2;
 	
 	public View() {
 	}
@@ -28,12 +34,12 @@ public class View implements IView{
 	}
 
 	@Override
-	public void flashLed1() {
+	public void flashLed1() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		ihm.flashLed1();		
 	}
 
 	@Override
-	public void flashLed2() {
+	public void flashLed2() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		ihm.flashLed2();
 	}
 

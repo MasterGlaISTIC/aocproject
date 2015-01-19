@@ -17,10 +17,6 @@ public class StartCommand implements ICommand
 	}
 
 	public void execute() {
-
-		//theMetronome.startCmd();		
-
-		System.out.println("2- CMD start");
 		controller.start();
 	}
 

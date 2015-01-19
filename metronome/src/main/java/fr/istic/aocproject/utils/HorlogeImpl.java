@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import fr.istic.aocproject.metronomeEngine.command.ICommand;
 
+@SuppressWarnings("restriction")
 public class HorlogeImpl implements Horloge {
 
 	private Timer timer = new Timer();
@@ -15,8 +16,8 @@ public class HorlogeImpl implements Horloge {
 
 	public void periodicallyActivate(final ICommand cmd,
 			double perdiodInMiliSeconds) {
-		System.out.println("10- Bar Horloge");
 		TimerTask task = new TimerTask() {
+			
 			public void run() {
 				Platform.runLater(new Runnable() {
 				       public void run() {

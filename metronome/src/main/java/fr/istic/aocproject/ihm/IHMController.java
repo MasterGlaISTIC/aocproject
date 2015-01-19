@@ -1,5 +1,7 @@
 package fr.istic.aocproject.ihm;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -14,6 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import fr.istic.aocproject.adapter.DecBtn;
 import fr.istic.aocproject.adapter.IButton;
 import fr.istic.aocproject.adapter.IncBtn;
@@ -23,9 +32,11 @@ import fr.istic.aocproject.controller.Controller;
 import fr.istic.aocproject.metronomeEngine.MetronomeEngine;
 import fr.istic.aocproject.metronomeEngine.command.DecCommand;
 import fr.istic.aocproject.metronomeEngine.command.IncCommand;
+import fr.istic.aocproject.metronomeEngine.command.SlideCommand;
 import fr.istic.aocproject.metronomeEngine.command.StartCommand;
 import fr.istic.aocproject.metronomeEngine.command.StopCommand;
 
+@SuppressWarnings("restriction")
 public class IHMController implements IiHMController, Initializable {
 
 	@FXML
@@ -84,21 +95,22 @@ public class IHMController implements IiHMController, Initializable {
 		controller.createViewAdapter(this);
 
 		start();
-		
+
 		stop();
-		
+
 		inc();
-		
-		
+
 		dec();
-		
-		
+
+		final IHMController pere = this;
 		// Slider
-		slider.setMin(0);
-		slider.setMax(200);
-		slider.setValue(120);
+		slider.setMin(MetronomeEngine.BPM_MIN_VALUE);
+		slider.setMax(MetronomeEngine.BPM_MAX_VALUE);
+		slider.setValue(MetronomeEngine.BPM_INITIAL_VALUE);
 		slider.valueProperty().addListener((ov, old_val, new_val) -> {
-			textfield.setText((int) new_val.doubleValue() + "");
+			int position = (int) new_val.doubleValue();
+			textfield.setText(position + "");
+			pere.notifyMetronomeSlidePosition(position);
 		});
 
 	}
@@ -137,32 +149,53 @@ public class IHMController implements IiHMController, Initializable {
 
 	TranslateTransition transition;
 	boolean theFistTimeBeat = true;
-	@Override
-	public void flashLed1() {
-		if(!theFistTimeBeat)
-		{
-		FillTransition st = new FillTransition(Duration.millis(100), led1,
-				Color.WHITE,Color.RED);
-		st.setCycleCount(4);
-		st.setAutoReverse(true);
+	AudioInputStream audioInputStream;
+	Clip clip;
 
-		st.play();
-		}else theFistTimeBeat = false;
-	}
-	
-	boolean theFistTimeBar = true;
 	@Override
-	public void flashLed2() {
-		if(!theFistTimeBar){
-		FillTransition st = new FillTransition(Duration.millis(100), led2,
-		Color.WHITE,Color.RED);
-		st.setCycleCount(4);
-		
-		st.setAutoReverse(true);
-		
-		st.play();
-		}else theFistTimeBar = false;
-		
+	public void flashLed1() throws UnsupportedAudioFileException, IOException,
+			LineUnavailableException {
+		if (!theFistTimeBeat) {
+			FillTransition st = new FillTransition(Duration.millis(100), led1,
+					Color.WHITE, Color.RED);
+			st.setCycleCount(4);
+			st.setAutoReverse(true);
+
+			st.play();
+
+			audioInputStream = AudioSystem.getAudioInputStream(new File(
+					"resources/beep.wav").getAbsoluteFile());
+
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+
+		} else
+			theFistTimeBeat = false;
+	}
+
+	boolean theFistTimeBar = true;
+
+	@Override
+	public void flashLed2() throws UnsupportedAudioFileException, IOException,
+			LineUnavailableException {
+		if (!theFistTimeBar) {
+			FillTransition st = new FillTransition(Duration.millis(100), led2,
+					Color.WHITE, Color.RED);
+			st.setCycleCount(4);
+
+			st.setAutoReverse(true);
+
+			st.play();
+
+			audioInputStream = AudioSystem.getAudioInputStream(new File(
+					"resources/bar.wav").getAbsoluteFile());
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+
+		} else
+			theFistTimeBar = false;
 
 	}
 
@@ -179,7 +212,18 @@ public class IHMController implements IiHMController, Initializable {
 		start.setOnAction((e) -> {
 			startCmd.execute();
 		});
-		
+
+	}
+
+	@Override
+	public void notifyMetronomeSlidePosition(int position) {
+		SlideCommand slideCmd = new SlideCommand();
+		slideCmd.setController(controller);
+		slideCmd.setPosition(position);
+		start.setOnAction((e) -> {
+			slideCmd.execute();
+		});
+
 	}
 
 	@Override
@@ -193,7 +237,7 @@ public class IHMController implements IiHMController, Initializable {
 			led1.setFill(Color.WHITE);
 			led2.setFill(Color.WHITE);
 		});
-		
+
 	}
 
 	@Override
@@ -203,7 +247,7 @@ public class IHMController implements IiHMController, Initializable {
 		inc.setOnAction((e) -> {
 			incCmd.execute();
 		});
-		
+
 	}
 
 	@Override
@@ -214,7 +258,7 @@ public class IHMController implements IiHMController, Initializable {
 		dec.setOnAction((e) -> {
 			decCmd.execute();
 		});
-		
+
 	}
 
 }

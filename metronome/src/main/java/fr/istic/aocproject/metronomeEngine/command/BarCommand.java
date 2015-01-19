@@ -1,5 +1,10 @@
 package fr.istic.aocproject.metronomeEngine.command;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import fr.istic.aocproject.controller.Controller;
 import fr.istic.aocproject.controller.IController;
 
@@ -10,18 +15,23 @@ public class BarCommand implements ICommand {
 	// IMetronomieEngine theMetronome;
 
 	public void setController(Controller controller){
-		System.out.println("8- Controller initialisation Bar");
+		
 		this.controller = controller;
 	}
 	public BarCommand() {
-		System.out.println("7 - Bar initialisation");
+		
 		
 	}
 
 	public void execute() {
-		System.out.println("11- Bar execute");
-		System.out.println("Bar cmd");
-		controller.displayLed2();
+		
+		try {
+			controller.displayLed2();
+		} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

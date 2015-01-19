@@ -18,9 +18,6 @@ public class StopCommand implements ICommand{
 
 	public void execute() {
 
-		//theMetronome.startCmd();		
-
-		System.out.println("STOP cmd");
 		controller.stop();
 
 	}

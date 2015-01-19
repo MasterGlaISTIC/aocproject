@@ -9,6 +9,10 @@ public  interface IMetronomeEngine
 		public boolean isRunning() ;
 				
 		public Integer getTempo() ;
+		
+		public Integer getNtm(); 
+		
+		public void setNtm(Integer ntm); 
 			
 		public void setBarCmd(ICommand parameter) ;
 						
@@ -25,6 +29,10 @@ public  interface IMetronomeEngine
 		Integer NTM_MIN_VALUE = 2;
 		
 		Integer NTM_MAX_VALUE = 7;
+		
+		public static final double BPM_MIN_VALUE = 0;
+		
+		public static final double BPM_MAX_VALUE = 200;
 
 		public void incNTM();
 
