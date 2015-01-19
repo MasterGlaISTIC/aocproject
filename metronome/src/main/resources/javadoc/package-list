@@ -1,0 +1,7 @@
+fr.istic.aocproject.adapter
+fr.istic.aocproject.controller
+fr.istic.aocproject.ihm
+fr.istic.aocproject.metronome
+fr.istic.aocproject.metronomeEngine
+fr.istic.aocproject.metronomeEngine.command
+fr.istic.aocproject.utils
